@@ -14,8 +14,8 @@ from matplotlib import colors
 # % of electricity from renewable sources EG.ELC.RNWX.ZS
 # 1960 - 2013
 
-# path = 'H:/USER/DVanLunen/indicator_data/world-development-indicators/'
-# os.chdir(path)
+path = '../world-development-indicators-data/'
+os.chdir(path)
 con = sqlite3.connect('database.sqlite')
 
 Indicator_df = pd.read_sql('SELECT * '
@@ -31,12 +31,12 @@ Indicator_df = pd.read_sql('SELECT * '
 #                              'Value':[5, 20, 40, 60]*2})
 
 # setup colorbar stuff and shape files
-highestpval = 60
-logbase = exp(1)
-norm = mpl.colors.Normalize(vmin=0, vmax=highestpval)
+highestpval = 70
+logbase = 1.01
+norm = mpl.colors.Normalize(vmin=0, vmax=25)
 colors_in_map = []
-for i in range(highestpval):
-    val = log(i + 1, logbase) / log(highestpval + 1, logbase)
+for i in range(25):
+    val = log(i + 1, logbase) / log(25 + 1, logbase)
     colors_in_map.append((1 - val, val, 0))
 cmap = colors.ListedColormap(colors_in_map)
 
